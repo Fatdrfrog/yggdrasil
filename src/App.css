@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  background-color: black;
+  height: 120vh;
+}
+.image {
+  width: 900px;
+  height: inherit;
+  margin: auto;
+  image-rendering: pixelated;
+  overflow-y: auto;
+  position: relative;
+  background-image: url("./assets/yggdrasil.jpg");
+}
+
+.button {
+  position: absolute;
+  width: 15rem;
+  background: green;
+  color: burlywood;
+  font-weight: 800;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: rgba(172, 255, 47, 0.735);
+}
+
+.button:active {
+  opacity: 80%;
+}
+
+.start {
+  top: 10%;
+  left: 38%;
+}
