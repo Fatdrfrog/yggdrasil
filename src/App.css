@@ -28,6 +28,8 @@
   padding: 0.3rem;
   border-radius: 1rem;
   cursor: pointer;
+  border: none;
+  z-index: 2;
 }
 
 .button:hover {
@@ -38,7 +40,43 @@
   opacity: 80%;
 }
 
+.button:disabled {
+  background: grey;
+}
+
 .start {
   top: 10%;
-  left: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sub-tree {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  height: -webkit-fill-available;
+}
+
+.btn1 {
+  top: 10%;
+}
+
+.btn2.btn3.btn4.btn5.btn6 {
+  top: 10%;
+}
+.btn3 {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn4 {
+  right: 0px;
+}
+
+.btn5 {
+  left: 15%;
+}
+
+.btn6 {
+  right: 15%;
 }
