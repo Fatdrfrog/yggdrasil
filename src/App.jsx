@@ -18,10 +18,17 @@ function App() {
     return conditionsData;
   });
 
+  const [currentTask, setCurrentTask] = useState(() => {
+    const local = JSON.parse(localStorage.getItem("task"));
+    if (local) return local;
+    return 0;
+  });
+
   const handleSetConditions = (condition, data) => {
     const newConditions = { ...conditions };
     newConditions[condition] = data;
     setConditions({ ...newConditions });
+    localStorage.setItem("task", JSON.stringify(currentTask));
     localStorage.setItem("conditions", JSON.stringify({ ...newConditions }));
   };
 
@@ -30,9 +37,22 @@ function App() {
     localStorage.clear();
   };
 
-  console.log(conditions);
+  const handleRemoveTask = () => {
+    setCurrentTask(0);
+    localStorage.setItem("task", JSON.stringify(""));
+  };
+
+  console.log(conditions, currentTask);
   return (
     <div className="container">
+      {currentTask && (
+        <Dialog
+          task={currentTask}
+          handleSetConditions={handleSetConditions}
+          handleRemoveTask={handleRemoveTask}
+        />
+      )}
+
       <button className="button" onClick={handleStartAgain}>
         Start again!
       </button>
@@ -49,18 +69,14 @@ function App() {
           <div className="sub-tree">
             <button
               className="button btn1"
-              onClick={() => handleSetConditions("isFirstButtonPressed", 1)}
+              onClick={() => {
+                handleSetConditions("isFirstButtonPressed", 1);
+                setCurrentTask(1);
+              }}
               disabled={conditions.isFirstButtonPressed}
             >
               What is going on here?
             </button>
-
-            {conditions.isFirstButtonPressed && !conditions.firstTaskResult && (
-              <Dialog
-                task={conditions.isFirstButtonPressed}
-                handleSetConditions={handleSetConditions}
-              />
-            )}
 
             {conditions.firstTaskResult && (
               <div className="sub-tree" style={{ top: "30%" }}>
@@ -112,24 +128,8 @@ function App() {
                     >
                       "Apple" noises
                     </button>
-
-                    {conditions.isThirdButtonPressed &&
-                      !conditions.thirdTaskResult && (
-                        <Dialog
-                          task={conditions.isThirdButtonPressed}
-                          handleSetConditions={handleSetConditions}
-                        />
-                      )}
                   </div>
                 )}
-
-                {conditions.isSecondButtonPressed &&
-                  !conditions.secondTaskResult && (
-                    <Dialog
-                      task={conditions.isSecondButtonPressed}
-                      handleSetConditions={handleSetConditions}
-                    />
-                  )}
               </div>
             )}
           </div>
