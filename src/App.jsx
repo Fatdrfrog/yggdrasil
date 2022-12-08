@@ -153,7 +153,8 @@ function App() {
                       </button>
                     )}
 
-                    {conditions.thirdTaskResult === 6 && (
+                    {(conditions.thirdTaskResult === 5 ||
+                      conditions.thirdTaskResult === 6) && (
                       <div className="sub-tree last">
                         <p>
                           Hey... you finally awake. <br />
