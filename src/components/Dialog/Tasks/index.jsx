@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { YggdrasilContext } from "../../../Context";
 
-export const Task1 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task1 = () => {
+  const { handleSetConditions, handleRemoveTask } =
+    useContext(YggdrasilContext);
+
   const handleFindAnswer = (event) => {
     const conditionValue =
       event.target.value === "Arrow noises"
@@ -33,11 +37,16 @@ export const Task1 = ({ handleSetConditions, handleRemoveTask }) => {
   );
 };
 
-export const Task2 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task2 = () => {
+  const { handleSetConditions, handleRemoveTask } =
+    useContext(YggdrasilContext);
   // you should use secondTaskResult with value of 2 here
 
   const handleFindAnswer = (event) => {
-    console.log("you should find if the typed input is equal to 495..");
+    if (event.target.value === "495tg") {
+      handleSetConditions("secondTaskResult", 2);
+      handleRemoveTask();
+    }
   };
 
   return (
@@ -61,7 +70,9 @@ export const Task2 = ({ handleSetConditions, handleRemoveTask }) => {
   );
 };
 
-export const Task3 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task3 = () => {
+  const { handleSetConditions, handleRemoveTask } =
+    useContext(YggdrasilContext);
   //y ou should use secondTaskResult with value of 3 if left was picked, and 33 if right was picked
 
   const handleFindAnswer = (parameter) => {
@@ -88,7 +99,9 @@ export const Task3 = ({ handleSetConditions, handleRemoveTask }) => {
   );
 };
 
-export const Task4 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task4 = () => {
+  const { handleSetConditions, handleRemoveTask } =
+    useContext(YggdrasilContext);
   // you should use secondTaskResult with value of 4 here
   const [currentJoke, setCurrentJoke] = useState(
     "Who is there? Interrupting dyslexic cow. Interrupting dysle-... OMO! "
@@ -125,7 +138,12 @@ export const Task4 = ({ handleSetConditions, handleRemoveTask }) => {
   );
 };
 
-export const Task5 = ({ handleSetConditions, handleRemoveTask, condition }) => {
+export const Task5 = () => {
+  const {
+    handleSetConditions,
+    handleRemoveTask,
+    conditions: { secondTaskResult },
+  } = useContext(YggdrasilContext);
   // you should use thirdTaskResult with value of 5 here
   const [bag, setBag] = useState([
     "simple apple",
@@ -139,12 +157,19 @@ export const Task5 = ({ handleSetConditions, handleRemoveTask, condition }) => {
   ]);
 
   const handleFindAnswer = () => {
-    console.log(
-      "remove from an array the tomato, and show the result to console!"
-    );
+    const bagWithoutTomato = bag.filter((el) => el !== "tomato");
+
+    setBag(bagWithoutTomato);
   };
 
-  return condition === 2 ? (
+  useEffect(() => {
+    if (!bag.find((el) => el === "tomato")) {
+      handleSetConditions("thirdTaskResult", 5);
+      handleRemoveTask();
+    }
+  }, [bag]);
+
+  return secondTaskResult === 2 ? (
     <>
       <p>
         Hunters shocked, an apple dropped. You see one girl looking for
@@ -199,7 +224,12 @@ export const Task5 = ({ handleSetConditions, handleRemoveTask, condition }) => {
   );
 };
 
-export const Task6 = ({ handleSetConditions, handleRemoveTask, condition }) => {
+export const Task6 = () => {
+  const {
+    handleSetConditions,
+    handleRemoveTask,
+    conditions: { thridTaskResult },
+  } = useContext(YggdrasilContext);
   // you should use thirdTaskResult with value of 6 here
   const [jump, setJump] = useState("");
 
@@ -220,7 +250,7 @@ export const Task6 = ({ handleSetConditions, handleRemoveTask, condition }) => {
       <p>
         All of you are now close to the roots. But who is going to jump first?
         <br />
-        {condition === 4
+        {thridTaskResult === 4
           ? "Bai's soldiers are afraid of jumping and deciding to push you first."
           : "You can see some soldiers with guy in the middle and thinking about jumping before they will see you"}
       </p>
