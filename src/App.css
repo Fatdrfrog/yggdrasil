@@ -80,3 +80,13 @@
 .btn6 {
   right: 15%;
 }
+
+.last {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: burlywood;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 70%;
+}
