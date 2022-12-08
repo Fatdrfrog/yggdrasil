@@ -46,7 +46,6 @@ function App() {
     localStorage.setItem("task", JSON.stringify(""));
   };
 
-  console.log(conditions, currentTask);
   return (
     <div className="container">
       {currentTask && (
