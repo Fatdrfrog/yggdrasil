@@ -1,7 +1,12 @@
 import "./style.css";
 import { Task1, Task2, Task3, Task4, Task5, Task6 } from "./Tasks";
 
-export const Dialog = ({ task, handleSetConditions, handleRemoveTask }) => {
+export const Dialog = ({
+  task,
+  handleSetConditions,
+  handleRemoveTask,
+  conditions,
+}) => {
   return (
     <div className="dialog">
       {task === 1 && (
@@ -32,12 +37,14 @@ export const Dialog = ({ task, handleSetConditions, handleRemoveTask }) => {
         <Task5
           handleSetConditions={handleSetConditions}
           handleRemoveTask={handleRemoveTask}
+          condition={conditions.secondTaskResult}
         />
       )}
       {task === 6 && (
         <Task6
           handleSetConditions={handleSetConditions}
           handleRemoveTask={handleRemoveTask}
+          condition={conditions.thirdTaskResult}
         />
       )}
     </div>

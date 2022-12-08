@@ -64,16 +64,25 @@ export const Task2 = ({ handleSetConditions, handleRemoveTask }) => {
 export const Task3 = ({ handleSetConditions, handleRemoveTask }) => {
   //y ou should use secondTaskResult with value of 3 if left was picked, and 33 if right was picked
 
+  const handleFindAnswer = (parameter) => {
+    console.log("you should chose if its left jump or right...");
+  };
+
   return (
     <>
-      You see one girl, she says that she is Kyz Zhibek, and because of too long
-      hairs she couldn't concentrate on some falling apples. <br /> Maybe you
-      should look to the left branch, she heard some sounds with "apple"
-      involved on them.. Or You might pick the right branch, cause, you know,
-      why not. Anyway, she is going to join you in finding this interesting
-      magic apple
+      One girl is sitting on one of the branches, she says that she is Kyz
+      Zhibek, and because of too long hairs she couldn't concentrate on some
+      falling apples. <br /> Maybe you should look to the left branch, she heard
+      some sounds with "apple" involved on them.. Or you might pick the right
+      branch, cause, you know, why not. Anyway, she is going to join you in
+      finding this interesting magic apple
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <button>Pick left</button> <button>Pick right</button>
+        <button className="button" style={{ bottom: "15%" }}>
+          Pick left
+        </button>
+        <button className="button" style={{ bottom: "5%" }}>
+          Pick right
+        </button>
       </div>
     </>
   );
@@ -81,19 +90,42 @@ export const Task3 = ({ handleSetConditions, handleRemoveTask }) => {
 
 export const Task4 = ({ handleSetConditions, handleRemoveTask }) => {
   // you should use secondTaskResult with value of 4 here
+  const [currentJoke, setCurrentJoke] = useState(
+    "Who is there? Interrupting dyslexic cow. Interrupting dysle-... OMO! "
+  );
+
+  const handleFindAnswer = (parameter) => {
+    console.log("you should write a good bad joke here.");
+  };
+
   return (
     <>
       <p>
-        Hunters eating 1kg of apples. One is going to drop from their pockets.
-        They see you and asks: what is a 1kg cost of an apples? If you will not
-        answer correctly they are going to make you an apple... ans: 495tg
+        Bai with his fellas saw some bright apple came just from above.
+        <br />
+        After seeing you he said, if you hiding this apple somewhere give me, or
+        I will tell you my worst knock-knock joke of all the time.
+        <br />
+        You start sweating after hearing that, and reply, what if I will tell
+        you my worst joke, if mine beats yours, I will leave the apple with
+        me(no idea where it is actually).
+        <br />
+        <b>Knock-knock: {currentJoke}</b>
       </p>
-      <input onChange={handleFindAnswer} />
+      <input className="button" style={{ bottom: "15%" }} />
+
+      <button
+        className="button"
+        style={{ bottom: "5%" }}
+        onChange={handleFindAnswer}
+      >
+        Drop the mic..
+      </button>
     </>
   );
 };
 
-export const Task5 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task5 = ({ handleSetConditions, handleRemoveTask, condition }) => {
   // you should use thirdTaskResult with value of 5 here
   const [bag, setBag] = useState([
     "simple apple",
@@ -112,7 +144,7 @@ export const Task5 = ({ handleSetConditions, handleRemoveTask }) => {
     );
   };
 
-  return (
+  return condition === 2 ? (
     <>
       <p>
         Hunters shocked, an apple dropped. You see one girl looking for
@@ -138,20 +170,81 @@ export const Task5 = ({ handleSetConditions, handleRemoveTask }) => {
         Find Tomato
       </button>
     </>
+  ) : (
+    <>
+      <p>
+        You see how some hunter-looking guys are holding on their hands a bright
+        apple. After making quick math calculations you are deciding to scream.
+        And Kyz Zhibek screams as well. And not because she was getting your
+        plan, but because it was horrible scream.Here is bag with some items,
+        she says:
+        <br /> (
+        {bag.map((el) => (
+          <>{el + ", "}</>
+        ))}
+        ) <br />. Try to throw them tomato instead of an apple. <br />
+        While screaming you deciding to jump from the branch to the roots, to
+        finally find an apple. Kyz Zhibek decides to drop a rocks to the hunters
+        and jumps with you. <br />
+        task: [remove from an array the tomato]
+      </p>
+      <button
+        className="button"
+        style={{ bottom: "5%" }}
+        onClick={handleFindAnswer}
+      >
+        Find Tomato
+      </button>
+    </>
   );
 };
 
-export const Task6 = ({ handleSetConditions, handleRemoveTask }) => {
+export const Task6 = ({ handleSetConditions, handleRemoveTask, condition }) => {
   // you should use thirdTaskResult with value of 6 here
+  const [jump, setJump] = useState("");
+
+  const handleJump = (event) => {
+    console.log(event.target.value);
+  };
+
+  const handleFindAnswer = () => {};
+
+  useEffect(() => {
+    if (jump) {
+      handleFindAnswer();
+    } else handleFindAnswer();
+  }, [jump]);
 
   return (
     <>
       <p>
-        Hunters eating 1kg of apples. One is going to drop from their pockets.
-        They see you and asks: what is a 1kg cost of an apples? If you will not
-        answer correctly they are going to make you an apple... ans: 495tg
+        All of you are now close to the roots. But who is going to jump first?
+        <br />
+        {condition === 4
+          ? "Bai's soldiers are afraid of jumping and deciding to push you first."
+          : "You can see some soldiers with guy in the middle and thinking about jumping before they will see you"}
       </p>
-      <input onChange={handleFindAnswer} />
+      <div>
+        <input
+          type="radio"
+          id="jump"
+          name="jump"
+          value="do"
+          onChange={handleJump}
+        />
+        <label htmlFor="jump">JUMP!</label>
+      </div>
+
+      <div>
+        <input
+          type="radio"
+          id="jump"
+          name="jump"
+          value="not"
+          onChange={handleJump}
+        />
+        <label htmlFor="jump">NO JUMP! RESIST! FIGHT!</label>
+      </div>
     </>
   );
 };

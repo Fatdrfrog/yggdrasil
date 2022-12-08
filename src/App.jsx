@@ -1,6 +1,6 @@
 import "./App.css";
 import { Dialog } from "./components/Dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const conditionsData = {
   isAdvStarted: false,
@@ -24,11 +24,15 @@ function App() {
     return 0;
   });
 
+  useEffect(() => {
+    localStorage.setItem("task", JSON.stringify(currentTask));
+  }, [currentTask]);
+
   const handleSetConditions = (condition, data) => {
     const newConditions = { ...conditions };
     newConditions[condition] = data;
     setConditions({ ...newConditions });
-    localStorage.setItem("task", JSON.stringify(currentTask));
+
     localStorage.setItem("conditions", JSON.stringify({ ...newConditions }));
   };
 
@@ -50,6 +54,7 @@ function App() {
           task={currentTask}
           handleSetConditions={handleSetConditions}
           handleRemoveTask={handleRemoveTask}
+          conditions={conditions}
         />
       )}
 
@@ -149,20 +154,22 @@ function App() {
                       </button>
                     )}
 
-                    <div className="sub-tree last">
-                      <p>
-                        Hey... you finally awake. <br />
-                        You were trying to cross the root, right? Jumped right
-                        into that Bai's soldiers ambush, same as us, and that
-                        thief over there. Damn you Hunters...
-                        <br />
-                        What kind of apple are you talking about?
-                      </p>
+                    {conditions.thirdTaskResult === 6 && (
+                      <div className="sub-tree last">
+                        <p>
+                          Hey... you finally awake. <br />
+                          You were trying to cross the root, right? Jumped right
+                          into that Bai's soldiers ambush, same as us, and that
+                          thief over there. Damn you Hunters...
+                          <br />
+                          What kind of apple are you talking about?
+                        </p>
 
-                      <button className="button" onClick={handleStartAgain}>
-                        Start again?
-                      </button>
-                    </div>
+                        <button className="button" onClick={handleStartAgain}>
+                          Start again?
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
